@@ -1,7 +1,6 @@
-
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
 import React from "react";
-import TabScreen from "../../components/TabScreen";
 
 const TabLayout = () => {
   return (
@@ -18,8 +17,33 @@ const TabLayout = () => {
         },
       }}
     >
-      <TabScreen defaultIconName="home-sharp" focusedIconName="home" title="Home" name="index" />
-      <TabScreen defaultIconName="information-circle" focusedIconName="information-circle" title="About" name="about" />
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "home-sharp" : "home-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="about"
+        options={{
+          title: "About",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "information-circle" : "information-circle-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 };
