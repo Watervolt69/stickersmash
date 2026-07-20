@@ -1,12 +1,15 @@
-import React from 'react'
-import { View } from "react-native";
-import { Image } from "react-native";
-const ImageViewer = () => {
-  return (
-   <View className="w-[380px] h-[700px] flex-1 ustify-center items-center ">
-     <Image source={imageSrc} className=" w-full h-full rounded-lg" />
-     </View>
-  )
-}
+import { Image, ImageSourcePropType, View } from "react-native";
 
-export default ImageViewer
+const ImageViewer = ({ imageSrc }: { imageSrc: ImageSourcePropType }) => {
+  return (
+    <View className="w-[320px] h-[420px] justify-center items-center overflow-hidden rounded-lg">
+      <Image
+        source={imageSrc}
+        resizeMode="cover"
+        className="w-full h-full rounded-lg"
+      />
+    </View>
+  );
+};
+
+export default ImageViewer;

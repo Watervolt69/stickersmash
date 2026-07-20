@@ -1,39 +1,43 @@
-import { Text, TouchableOpacity } from "react-native";
+import React from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-type CustomButtonProps = {
-  title: string;
-  variant?: "buttonPrimary" | "buttonSecondary" | "buttonWarning";
-};
+const Button = ({ lable, theme ,onPress }: { lable: string; theme?: 'primary'; onPress: () => void }) => {
 
-const variantClasses: Record<
-  NonNullable<CustomButtonProps["variant"]>,
-  string
-> = {
-  buttonPrimary: "bg-primary",
-  buttonSecondary: "border border-hairline bg-canvasElevated",
-  buttonWarning: "bg-gradient-to-r from-gradientShipStart to-gradientShipEnd",
-};
+const handlePress = () => {
+  onPress();
+}
 
-const textClasses: Record<NonNullable<CustomButtonProps["variant"]>, string> = {
-  buttonPrimary: "text-onPrimary",
-  buttonSecondary: "text-ink",
-  buttonWarning: "text-onPrimary",
-};
 
-export function CustomButton({
-  title,
-  variant = "buttonPrimary",
-}: CustomButtonProps) {
+if (theme === 'primary') {
   return (
-    <TouchableOpacity
-      className={`my-2 min-w-[150px] items-center justify-center rounded-[100px] px-[16px] py-3 ${variantClasses[variant]}`}
-      activeOpacity={0.78}
-    >
-      <Text
-        className={`text-center font-semibold text-base ${textClasses[variant]}`}
-      >
-        {title}
+    <TouchableOpacity className=" bg-primary
+     rounded-full
+      px-4
+       py-2"
+       onPress={handlePress}
+       >
+      <Text className="text-hairline Text text-base font-medium px-4 py-2 rounded-full">
+        <FontAwesome name='picture-o' size={20} color='#dde0e2' className='mr-2' />
+        
+        {lable}
       </Text>
     </TouchableOpacity>
-  );
+  )
 }
+  return (
+    <TouchableOpacity className="bg-mute
+     rounded-full
+      px-4
+       py-2"
+       onPress={handlePress}
+       >
+      <Text className="text-hairline  Text text-base font-medium px-4 py-2 rounded-full">
+        <FontAwesome name='file-picture-o' size={20} color='#dde0e2' className='mr-2' />
+        {lable}
+      </Text>
+    </TouchableOpacity>
+  )
+}
+
+export default Button
