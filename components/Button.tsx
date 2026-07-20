@@ -1,4 +1,3 @@
-import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
 type CustomButtonProps = {
@@ -21,17 +20,17 @@ const textClasses: Record<NonNullable<CustomButtonProps["variant"]>, string> = {
   buttonWarning: "text-onPrimary",
 };
 
-export default function CustomButton({
+export function CustomButton({
   title,
   variant = "buttonPrimary",
 }: CustomButtonProps) {
   return (
     <TouchableOpacity
-      className={`my-2 min-w-[150px] items-center justify-center rounded-[100px] px-[14px] py-3 ${variantClasses[variant]}`}
-      activeOpacity={0.7}
+      className={`my-2 min-w-[150px] items-center justify-center rounded-[100px] px-[16px] py-3 ${variantClasses[variant]}`}
+      activeOpacity={0.78}
     >
       <Text
-        className={`text-center font-medium text-base ${textClasses[variant]}`}
+        className={`text-center font-semibold text-base ${textClasses[variant]}`}
       >
         {title}
       </Text>

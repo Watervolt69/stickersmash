@@ -1,6 +1,5 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Tabs } from "expo-router";
-import React from "react";
+import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Tabs } from "expo-router/tabs";
 
 const TabLayout = () => {
   return (
@@ -21,7 +20,7 @@ const TabLayout = () => {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color, focused }: {color:string, focused:boolean}) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
               color={color}
@@ -35,9 +34,11 @@ const TabLayout = () => {
         name="about"
         options={{
           title: "About",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color, focused }: {color:string, focused:boolean}) => (
             <Ionicons
-              name={focused ? "information-circle" : "information-circle-outline"}
+              name={
+                focused ? "information-circle" : "information-circle-outline"
+              }
               color={color}
               size={24}
             />
@@ -49,6 +50,3 @@ const TabLayout = () => {
 };
 
 export default TabLayout;
-
-
-

@@ -1,10 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // NOTE: Update this to include the paths to all files that contain Nativewind classes.
   content: [
+    "./App.tsx",
     "./app/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
-    "./styles/**/*.{js,jsx,ts,tsx}",
   ],
+  presets: [require("nativewind/preset")],
   theme: {
     extend: {
       colors: {
@@ -32,11 +34,11 @@ module.exports = {
         gradientShipEnd: "#f9cb28",
       },
       fontFamily: {
-        sans: ["PlusJakartaSans_400Regular", "Arial", "sans-serif"],
-        medium: ["PlusJakartaSans_500Medium", "Arial", "sans-serif"],
-        semibold: ["PlusJakartaSans_600SemiBold", "Arial", "sans-serif"],
-        bold: ["PlusJakartaSans_700Bold", "Arial", "sans-serif"],
-        mono: ["PlusJakartaSans_400Regular", "Arial", "sans-serif"],
+        sans: ["Jakarta-Regular"],
+        medium: ["Jakarta-Medium"],
+        semibold: ["Jakarta-SemiBold"],
+        bold: ["Jakarta-Bold"],
+        mono: ["Jakarta-Regular"],
       },
     },
   },

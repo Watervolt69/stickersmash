@@ -1,6 +1,6 @@
-import CustomButton from "@/components/Button";
-import { Link, Stack } from "expo-router";
-import React from "react";
+import {CustomButton} from "../components/Button";
+import Link from "expo-router/link";
+import { Stack } from "expo-router/stack";
 import { Text, View } from "react-native";
 
 const NotFoundScreen = () => {
