@@ -1,15 +1,16 @@
+import CustomButton from "@/components/Button";
+import { Link } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
-import {Link} from 'expo-router'
-import { IndexStyles } from "../../styles/globalStyles";
-import CustomButton from "@/components/Button";
 
 const Index = () => {
   return (
-    <View style={IndexStyles.container}>
-      <Text style={IndexStyles.text}>Hello from Index</Text>
-      <Link href="/about" >
-      <CustomButton title="About " variant="buttonPrimary" />
+    <View className="flex-1 items-center justify-center bg-canvas p-6">
+      <Text className="text-center font-bold text-5xl tracking-[-2.4px] text-ink">
+        Hello from Index
+      </Text>
+      <Link href="/about">
+        <CustomButton title="About" variant="buttonPrimary" />
       </Link>
     </View>
   );
