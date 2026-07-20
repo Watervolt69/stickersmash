@@ -12,7 +12,7 @@ const TabLayout = () => {
         headerShadowVisible: false,
         headerTintColor: "#fff",
         tabBarStyle: {
-          backgroundColor: "#25292e",
+          backgroundColor: "#e6e3e6",
         },
       }}
     >
