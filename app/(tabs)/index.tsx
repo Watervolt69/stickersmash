@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import {Link} from 'expo-router'
-import { IndexStyles } from "../styles/globalStyles";
+import { IndexStyles } from "../../styles/globalStyles";
 import CustomButton from "@/components/Button";
 
 const Index = () => {

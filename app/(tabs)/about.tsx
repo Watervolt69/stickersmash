@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import {AboutStyles} from '../styles/globalStyles'
+import {AboutStyles} from '../../styles/globalStyles'
 const about = () => {
   return (
     <View style={AboutStyles.container}>
