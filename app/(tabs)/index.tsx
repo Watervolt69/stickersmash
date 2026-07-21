@@ -7,15 +7,18 @@ import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import EmojiPicker from "@/components/EmojiPicker";
 import EmojiList from "@/components/EmojiList";
-
+import EmojiSticker from "@/components/EmojiSticker";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const PlaceholderImage = require("@/assets/images/background-image.png");
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
 
-  const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const [pickedEmoji, setPickedEmoji] =  useState<ImageSourcePropType | undefined>(undefined)
+  const [pickedEmoji, setPickedEmoji] = useState<
+    ImageSourcePropType | undefined
+  >(undefined);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,26 +37,31 @@ const Index = () => {
   const onReset = () => {
     setShowAppOptions(false);
     setSelectedImage(null);
+    setPickedEmoji(undefined);
   };
 
   const onAddSticker = () => {
-    setIsVisible(true)
+    setIsVisible(true);
   };
 
-          
   const onModalClose = () => {
     setIsVisible(false);
   };
-          
 
   const onSaveImageAsync = async () => {
     // Save image logic
   };
 
   return (
-    <View className="flex-1 bg-canvas justify-between items-center py-4 px-3">
+    <GestureHandlerRootView className="flex-1 bg-canvas justify-between items-center py-4 px-3">
       <View className="flex-1 w-full justify-center items-center my-1">
-        <ImageViewer imageSrc={PlaceholderImage} selectedImage={selectedImage} />
+        <ImageViewer
+          imageSrc={PlaceholderImage}
+          selectedImage={selectedImage}
+        />
+        {pickedEmoji && (
+          <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
+        )}
       </View>
 
       {showAppOptions ? (
@@ -65,16 +73,17 @@ const Index = () => {
       ) : (
         <View className="w-full items-center gap-2 pb-2 pt-2">
           <Button lable="Choose a photo" theme="primary" onPress={pickImage} />
-          <Button lable="Use this photo" onPress={() => setShowAppOptions(true)} />
+          <Button
+            lable="Use this photo"
+            onPress={() => setShowAppOptions(true)}
+          />
         </View>
       )}
 
-
-<EmojiPicker isVisible={isVisible} onClose={onModalClose} >
-
-<EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
-</EmojiPicker>
-    </View>
+      <EmojiPicker isVisible={isVisible} onClose={onModalClose}>
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+      </EmojiPicker>
+    </GestureHandlerRootView>
   );
 };
 

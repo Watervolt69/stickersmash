@@ -1,4 +1,5 @@
-import { Image, ImageSourcePropType, View, StyleSheet } from "react-native";
+import { Image } from "expo-image";
+import { ImageSourcePropType, View, StyleSheet } from "react-native";
 
 type Props = {
   imageSrc: ImageSourcePropType;
@@ -12,7 +13,7 @@ const ImageViewer = ({ imageSrc, selectedImage }: Props) => {
     <View className="w-full max-w-[480px] h-[640px] max-h-[78vh] justify-center items-center overflow-hidden rounded-3xl bg-canvasElevated border border-hairline shadow-xl">
       <Image
         source={imageSource}
-        resizeMode="cover"
+        contentFit="cover"
         style={styles.image}
         className="w-full h-full rounded-3xl"
       />

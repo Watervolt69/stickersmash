@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { Image } from "expo-image";
 import {
   FlatList,
-  Image,
   Platform,
   Pressable,
   ImageSourcePropType,
@@ -45,7 +45,7 @@ export default function EmojiList({ onSelect, onCloseModal }: Props) {
         >
           <Image
             source={item}
-            resizeMode="contain"
+            contentFit="contain"
             style={{ width: imageSize, height: imageSize }}
           />
         </Pressable>
