@@ -1,10 +1,21 @@
 import { Image, ImageSourcePropType, View } from "react-native";
 
-const ImageViewer = ({ imageSrc }: { imageSrc: ImageSourcePropType }) => {
+
+
+type Props = {
+  imageSrc: ImageSourcePropType;
+  selectedImage?: string | null;
+};
+
+const ImageViewer = ({ imageSrc, selectedImage }: Props) => {
+  const imageSource = selectedImage ? { uri: selectedImage } : imageSrc;
+
+
+
   return (
     <View className="w-[320px] h-[420px] justify-center items-center overflow-hidden rounded-lg">
       <Image
-        source={imageSrc}
+        source={imageSource}
         resizeMode="cover"
         className="w-full h-full rounded-lg"
       />
