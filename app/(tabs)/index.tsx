@@ -1,14 +1,16 @@
-import { Text, View, Pressable } from "react-native";
+import { View } from "react-native";
 import ImageViewer from "../../components/ImageViewer";
 import Button from "../../components/Button";
+import CircleButton from "../../components/CircleButton";
+import IconButton from "../../components/IconButton";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const PlaceholderImage = require("@/assets/images/background-image.png");
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
@@ -16,29 +18,46 @@ const Index = () => {
       quality: 1,
     });
     if (!result.canceled) {
-      console.log(result);
       setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
     } else {
-      alert("you did not pick any image ");
+      alert("You did not pick any image.");
     }
   };
 
-  return (
-    <>
-      <View className="flex-1 bg-canvas justify-center items-center gap-16">
-        <ImageViewer imageSrc={PlaceholderImage} selectedImage={selectedImage} />
+  const onReset = () => {
+    setShowAppOptions(false);
+    setSelectedImage(null);
+  };
 
-        <View className="flex-col gap-4">
-          <Button lable="Choose a Photo" theme="primary" onPress={pickImage} />
-          <Button lable="Use This Photo" onPress={() => setShowAppOptions(true)} />
-        </View>
+  const onAddSticker = () => {
+    // Sticker picker modal logic
+  };
+
+  const onSaveImageAsync = async () => {
+    // Save image logic
+  };
+
+  return (
+    <View className="flex-1 bg-canvas justify-between items-center py-4 px-3">
+      <View className="flex-1 w-full justify-center items-center my-1">
+        <ImageViewer imageSrc={PlaceholderImage} selectedImage={selectedImage} />
       </View>
 
-    
-    </>
+      {showAppOptions ? (
+        <View className="w-full flex-row items-center justify-around px-6 pb-2 pt-2">
+          <IconButton icon="refresh" label="Reset" onPress={onReset} />
+          <CircleButton onPress={onAddSticker} />
+          <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+        </View>
+      ) : (
+        <View className="w-full items-center gap-2 pb-2 pt-2">
+          <Button lable="Choose a photo" theme="primary" onPress={pickImage} />
+          <Button lable="Use this photo" onPress={() => setShowAppOptions(true)} />
+        </View>
+      )}
+    </View>
   );
 };
-
 
 export default Index;

@@ -1,18 +1,26 @@
-import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Ionicons } from "@react-native-vector-icons/ionicons";
 import { Tabs } from "expo-router/tabs";
 
 const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#ffd33d",
+        tabBarActiveTintColor: "#0070f3",
+        tabBarInactiveTintColor: "#8f8f8f",
         headerStyle: {
-          backgroundColor: "#25292e",
+          backgroundColor: "#ffffff",
+        },
+        headerTitleStyle: {
+          fontFamily: "PlusJakartaSans_700Bold",
+          color: "#171717",
         },
         headerShadowVisible: false,
-        headerTintColor: "#fff",
+        headerTintColor: "#171717",
         tabBarStyle: {
-          backgroundColor: "#e6e3e6",
+          backgroundColor: "#ffffff",
+          borderTopColor: "#ebebeb",
+          elevation: 0,
+          shadowOpacity: 0,
         },
       }}
     >
@@ -20,7 +28,7 @@ const TabLayout = () => {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, focused }: {color:string, focused:boolean}) => (
+          tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
               color={color}
@@ -34,7 +42,7 @@ const TabLayout = () => {
         name="about"
         options={{
           title: "About",
-          tabBarIcon: ({ color, focused }: {color:string, focused:boolean}) => (
+          tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <Ionicons
               name={
                 focused ? "information-circle" : "information-circle-outline"
