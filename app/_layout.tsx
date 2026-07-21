@@ -9,6 +9,7 @@ import { Stack } from "expo-router/stack";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "../global.css";
+import { StatusBar } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,8 +32,13 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
+    <>
+      <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
+    <StatusBar style="light" />
+    </>
+
+  
   );
 }

@@ -10,12 +10,11 @@ const ImageViewer = ({ imageSrc, selectedImage }: Props) => {
   const imageSource = selectedImage ? { uri: selectedImage } : imageSrc;
 
   return (
-    <View className="w-full max-w-[480px] h-[640px] max-h-[78vh] justify-center items-center overflow-hidden rounded-3xl bg-canvasElevated border border-hairline shadow-xl">
+    <View className="w-[320px] sm:w-[360px] h-[440px] max-w-[92vw] max-h-[65vh] justify-center items-center overflow-hidden rounded-3xl bg-canvasElevated border border-hairline shadow-xl">
       <Image
         source={imageSource}
         contentFit="cover"
         style={styles.image}
-        className="w-full h-full rounded-3xl"
       />
     </View>
   );

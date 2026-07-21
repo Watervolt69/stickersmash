@@ -33,8 +33,17 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "The app accesses your photos to let you save stickers and edited photos.",
+          "savePhotosPermission": "The app saves photos to your library.",
+          "isAccessMediaLocationEnabled": true
+        }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
