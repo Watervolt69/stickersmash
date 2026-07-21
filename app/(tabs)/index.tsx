@@ -1,15 +1,21 @@
-import { View } from "react-native";
+import { ImageSourcePropType, View } from "react-native";
 import ImageViewer from "../../components/ImageViewer";
 import Button from "../../components/Button";
 import CircleButton from "../../components/CircleButton";
 import IconButton from "../../components/IconButton";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import EmojiPicker from "@/components/EmojiPicker";
+import EmojiList from "@/components/EmojiList";
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const PlaceholderImage = require("@/assets/images/background-image.png");
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+
+  const [pickedEmoji, setPickedEmoji] =  useState<ImageSourcePropType | undefined>(undefined)
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -31,8 +37,14 @@ const Index = () => {
   };
 
   const onAddSticker = () => {
-    // Sticker picker modal logic
+    setIsVisible(true)
   };
+
+          
+  const onModalClose = () => {
+    setIsVisible(false);
+  };
+          
 
   const onSaveImageAsync = async () => {
     // Save image logic
@@ -56,6 +68,12 @@ const Index = () => {
           <Button lable="Use this photo" onPress={() => setShowAppOptions(true)} />
         </View>
       )}
+
+
+<EmojiPicker isVisible={isVisible} onClose={onModalClose} >
+
+<EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+</EmojiPicker>
     </View>
   );
 };
