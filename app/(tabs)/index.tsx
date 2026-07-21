@@ -4,17 +4,15 @@ import Button from "../../components/Button";
 import CircleButton from "../../components/CircleButton";
 import IconButton from "../../components/IconButton";
 import * as ImagePicker from "expo-image-picker";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import EmojiPicker from "@/components/EmojiPicker";
 import EmojiList from "@/components/EmojiList";
 import EmojiSticker from "@/components/EmojiSticker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { captureRef } from "react-native-view-shot";
-import * as MediaLibrary from "expo-media-library";
+import { shareAsync, isAvailableAsync } from "expo-sharing";
 
 const Index = () => {
-  const [status, requestPermission] = MediaLibrary.usePermissions();
-
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const PlaceholderImage = require("@/assets/images/background-image.png");
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
@@ -24,12 +22,6 @@ const Index = () => {
   >(undefined);
 
   const ImageRef = useRef<View>(null);
-
-  useEffect(() => {
-    if (status === null) {
-      requestPermission();
-    }
-  }, [status]);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -62,26 +54,19 @@ const Index = () => {
   const onSaveImageAsync = async () => {
     if (Platform.OS !== "web") {
       try {
-        if (!status?.granted) {
-          const permission = await requestPermission();
-          if (!permission.granted) {
-            alert("Media library permission is required to save photos.");
-            return;
-          }
-        }
-
         const localUrl = await captureRef(ImageRef, {
           height: 440,
           quality: 1,
         });
 
-        await MediaLibrary.saveToLibraryAsync(localUrl);
-
-        if (localUrl) {
-          alert("Saved to media library!");
+        const isAvailable = await isAvailableAsync();
+        if (isAvailable) {
+          await shareAsync(localUrl);
+        } else {
+          alert("Sharing / saving is not available on this device.");
         }
       } catch (err) {
-        console.log("Error saving image:", err);
+        console.log("Error saving/sharing image:", err);
         alert("An error occurred while saving: " + err);
       }
     } else {

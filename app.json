@@ -41,9 +41,9 @@
           "savePhotosPermission": "The app saves photos to your library.",
           "isAccessMediaLocationEnabled": true
         }
-      ]
+      ],
+      "expo-sharing"
     ],
-
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
