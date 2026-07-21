@@ -17,7 +17,6 @@ type Props = {
 export default function EmojiSticker({ imageSize, stickerSource }: Props) {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
-
   const scaleImage = useSharedValue(imageSize);
 
   const doubleTap = Gesture.Tap()
@@ -30,16 +29,18 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
       }
     });
 
+  const drag = Gesture.Pan().onChange((e) => {
+    translateX.value += e.changeX;
+    translateY.value += e.changeY;
+  });
+
+  const composedGesture = Gesture.Simultaneous(drag, doubleTap);
+
   const imageStyle = useAnimatedStyle(() => {
     return {
       width: withSpring(scaleImage.value),
       height: withSpring(scaleImage.value),
     };
-  });
-
-  const drag = Gesture.Pan().onChange((e) => {
-    translateX.value += e.changeX;
-    translateY.value += e.changeY;
   });
 
   const containerStyle = useAnimatedStyle(() => {
@@ -56,15 +57,24 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
   });
 
   return (
-    <GestureDetector gesture={drag}>
-      <Animated.View style={[containerStyle, { top: -350 }]}>
-        <GestureDetector gesture={doubleTap}>
-          <AnimatedImage
-            source={stickerSource}
-            contentFit="contain"
-            style={[imageStyle, { width: imageSize, height: imageSize }]}
-          />
-        </GestureDetector>
+    <GestureDetector gesture={composedGesture}>
+      <Animated.View
+        style={[
+          containerStyle,
+          {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            marginTop: -imageSize / 2,
+            marginLeft: -imageSize / 2,
+          },
+        ]}
+      >
+        <AnimatedImage
+          source={stickerSource}
+          contentFit="contain"
+          style={[imageStyle, { width: imageSize, height: imageSize }]}
+        />
       </Animated.View>
     </GestureDetector>
   );
